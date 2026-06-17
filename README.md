@@ -1,55 +1,74 @@
-# Grandmother's Health Almanac 🌹
+# Grandmother's Health Almanac 🐱
 
-A loving, beautiful little health tracker for Grandma — and her cat.
+A neon-lit (or ancient-clay) health tracker for Grandma — and her very vocal cat.
 
-It keeps a gentle daily record of three things, plus one delight:
+It keeps a gentle daily record, with a live dashboard on top:
 
 - 🍞 **Food intake** — dish, portion, time and notes
-- ⚠️ **Allergic reactions** — trigger, symptoms, severity (mild / moderate / severe) and time
+- ⚠️ **Reactions linked to each meal** — *not* a separate allergy list. Every
+  reaction (digestive, skin, mood, or "no issue at all") is logged **against the
+  specific meal that may have caused it**, so food and reaction always stay tied
+  together.
 - 💊 **Medication** — name, dose, time and whether it was taken
-- 🐱 **Whiskers, the cat** — a hand-drawn companion with a button that makes him *meow*
+- 📊 **Dashboard summary** — today's meals, reactions and doses; an all-time
+  severity breakdown; **which foods are linked to reactions**; and medication
+  adherence for today
+- 🐈 **Whiskers the cat** — a hand-drawn companion with **four** synthesised
+  voices: **Meow, Purr, Chirp** and **Hiss**
 
 Everything is saved privately in your browser (`localStorage`). No accounts, no
 servers, nothing leaves the device.
 
+## Made for Grandma
+
+Grandma is of **Jewish–Slavic** heritage, so the food log comes pre-stocked with
+her kind of cooking. One-tap **Quick add** chips (and a fuller type-ahead list)
+offer dishes like *matzo ball soup, borscht, gefilte fish, latkes, challah,
+blintzes, kreplach, kasha varnishkes, kugel, rugelach, brisket, tzimmes,
+cholent, holishkes, pierogi, varenyky, holodets, herring, black rye bread,
+babka, kompot* and *tea with lemon*. Common medications are pre-stocked too.
+
 ## Two beautiful themes
 
-Switch instantly between two fully-realised visual styles using the toggle in
-the header (your choice is remembered):
+Switch instantly with the toggle in the header (your choice is remembered):
 
 | Theme | Mood |
 | --- | --- |
-| **Victorian Garden** *(default)* | Parchment, gilt frames, deep roses and trailing ivy. Rose petals drift gently down the page. |
+| **Neon City** *(default)* | Full cyberpunk — a dark grid horizon, neon cyan/magenta glow, animated scanlines, a glitching title and a glowing cyber-cat. Neon shards rain down the page. |
 | **Ancient Sumer** | A sun-baked clay tablet pressed with cuneiform glyphs, terracotta and burnt-sienna tones, with motes of dust in the air. |
 
 Each theme restyles everything — fonts, colours, ornaments, the cat's coat, and
-even the cat's meow speech-bubble (which speaks in cuneiform on the clay tablet).
+even the cat's speech bubble (which speaks in cuneiform on the clay tablet).
 
 ## The cat 🐈
 
-- **Picture:** Whiskers is drawn entirely in inline **SVG** — no image files, so
-  he stays crisp at any size and recolours himself to match the active theme.
-  His tail sways, his ears sit alert, and he blinks every so often.
-- **Sound:** the *meow* is **synthesised live with the Web Audio API** — a
-  pitch-gliding source shaped by two sweeping formant filters, so there's no
-  audio file to ship. Pressing the button plays the meow, bounces the cat, and
-  pops a little speech bubble.
+- **Picture:** Whiskers is drawn entirely in inline **SVG** — no image files — so
+  he stays crisp at any size, recolours to match the theme, sways his tail and
+  blinks.
+- **Sounds:** all four voices are **synthesised live with the Web Audio API** —
+  no audio files:
+  - **Meow** — a pitch-glide through two sweeping formant filters
+  - **Purr** — a low filtered rumble under a ~26 Hz amplitude tremolo
+  - **Chirp** — a quick rising trill with three little pulses
+  - **Hiss** — a burst of band-passed noise
+
+  Each button plays its sound, animates the cat (a bounce, or an arch for the
+  hiss) and pops a matching speech bubble.
 
 ## Running it
 
-It's a static site with **no build step and no dependencies**. Either:
+A static site with **no build step and no dependencies**. Either:
 
 ```bash
-# open directly
 open index.html            # macOS  (use `xdg-open` on Linux)
 
-# …or serve it locally (recommended, so fonts/audio behave consistently)
+# …or serve it locally (recommended)
 python3 -m http.server 8000
 # then visit http://localhost:8000
 ```
 
 > The page links Google Fonts for the display typefaces and cuneiform glyphs.
-> Offline, it falls back gracefully to elegant system serifs.
+> Offline, it falls back gracefully to system fonts.
 
 ## Project layout
 
@@ -57,17 +76,17 @@ python3 -m http.server 8000
 .
 ├── index.html      # structure & the inline SVG cat
 ├── css/styles.css  # both themes, decorations, animations (CSS variables)
-├── js/app.js       # storage, rendering, stats, theme switch, the meow
+├── js/app.js       # storage, rendering, the dashboard, theming, cat sounds
 └── README.md
 ```
 
 ## Accessibility & niceties
 
-- Respects `prefers-reduced-motion` (petals, sway and blink stand still).
+- Respects `prefers-reduced-motion` (shards, scanline sweep, sway, blink and the
+  title glitch all stand still).
 - Keyboard-focusable controls with visible focus rings.
-- "Today at a glance" tallies meals, reactions and doses taken today.
-- User text is rendered as text (never injected as HTML), so entries are safe.
+- User-entered text is rendered as text (never injected as HTML).
 
 ---
 
-Made with love, ivy & roses. 🌿
+Made for Grandma, with love. 🌃🐈

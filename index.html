@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="victorian">
+<html lang="en" data-theme="cyberpunk">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Grandmother's Health Almanac</title>
-  <meta name="description" content="A loving health tracker for Grandma — food, allergies & medication — wrapped in ivy, roses and ancient script." />
+  <meta name="description" content="A neon-lit health tracker for Grandma — meals with linked reactions, medication, a live dashboard, and a cat with many voices." />
 
-  <!-- Fonts: Victorian display + body, Sumerian carved-stone + cuneiform glyphs -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Cinzel:wght@400;600;700&family=Noto+Sans+Cuneiform&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Noto+Sans+Cuneiform&display=swap"
     rel="stylesheet"
   />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%8C%B9%3C/text%3E%3C/svg%3E" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%90%B1%3C/text%3E%3C/svg%3E" />
 </head>
 <body>
-  <!-- Ambient decorations (theme toggles which are visible) -->
-  <div class="ambient" aria-hidden="true">
-    <div class="petals" id="petals"></div>
-  </div>
+  <!-- Ambient layers -->
+  <div class="ambient" aria-hidden="true"><div class="petals" id="petals"></div></div>
+  <div class="scanlines" aria-hidden="true"></div>
 
   <!-- ===================== HEADER ===================== -->
   <header class="masthead">
@@ -29,26 +27,25 @@
 
     <div class="masthead__inner">
       <div class="flourish flourish--top" aria-hidden="true">
-        <span class="vic-only">&#10086; &#9884; &#10087;</span>
+        <span class="cyber-only">&#9670; &#9671; &#9670;</span>
         <span class="sum-only">&#74154; &#74139; &#74154;</span>
       </div>
 
-      <h1 class="title">Grandmother&rsquo;s Health Almanac</h1>
+      <h1 class="title" data-text="Grandmother&rsquo;s Health Almanac">Grandmother&rsquo;s Health Almanac</h1>
 
       <p class="subtitle">
-        <span class="vic-only">Tended with ivy, roses &amp; the most loving of care</span>
+        <span class="cyber-only">Vitals online &middot; readings stored securely on this device</span>
         <span class="sum-only">A clay tablet of days &mdash; inscribed for she who is cherished</span>
       </p>
 
       <div class="flourish flourish--bottom" aria-hidden="true"></div>
     </div>
 
-    <!-- Theme switcher -->
     <div class="theme-switch" role="group" aria-label="Choose a visual theme">
       <span class="theme-switch__label">Theme</span>
-      <button class="theme-btn is-active" data-set-theme="victorian" type="button">
-        <span class="theme-btn__swatch theme-btn__swatch--vic"></span>
-        Victorian Garden
+      <button class="theme-btn is-active" data-set-theme="cyberpunk" type="button">
+        <span class="theme-btn__swatch theme-btn__swatch--cyber"></span>
+        Neon City
       </button>
       <button class="theme-btn" data-set-theme="sumerian" type="button">
         <span class="theme-btn__swatch theme-btn__swatch--sum"></span>
@@ -59,27 +56,82 @@
 
   <main class="page">
 
-    <!-- ===================== TODAY AT A GLANCE ===================== -->
-    <section class="glance" aria-label="Today at a glance">
-      <article class="glance__card">
-        <span class="glance__num" id="stat-meals">0</span>
-        <span class="glance__lbl">Meals today</span>
-      </article>
-      <article class="glance__card">
-        <span class="glance__num" id="stat-reactions">0</span>
-        <span class="glance__lbl">Reactions today</span>
-      </article>
-      <article class="glance__card">
-        <span class="glance__num" id="stat-meds">0</span>
-        <span class="glance__lbl">Doses taken today</span>
-      </article>
+    <!-- ===================== DASHBOARD SUMMARY ===================== -->
+    <section class="report" aria-label="Dashboard summary">
+      <header class="report__head">
+        <span class="report__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 13h4v7H4zM10 4h4v16h-4zM16 9h4v11h-4z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        </span>
+        <div>
+          <h2 class="report__title">Dashboard</h2>
+          <p class="report__sub cyber-only">Live readout of today&rsquo;s care</p>
+          <p class="report__sub sum-only">The day&rsquo;s account, told in full</p>
+        </div>
+      </header>
+
+      <div class="report__stats">
+        <article class="stat">
+          <span class="stat__num" id="stat-meals">0</span>
+          <span class="stat__lbl">Meals today</span>
+          <span class="stat__sub"><span id="stat-meals-total">0</span> recorded in all</span>
+        </article>
+        <article class="stat stat--alert">
+          <span class="stat__num" id="stat-reactions">0</span>
+          <span class="stat__lbl">Reactions today</span>
+          <span class="stat__sub"><span id="stat-reactions-total">0</span> recorded in all</span>
+        </article>
+        <article class="stat stat--ok">
+          <span class="stat__num" id="stat-doses">0</span>
+          <span class="stat__lbl">Doses taken today</span>
+          <span class="stat__sub"><span id="stat-missed">0</span> still due</span>
+        </article>
+      </div>
+
+      <div class="report__grid">
+        <section class="report__card">
+          <h3 class="report__cardtitle">Reaction severity</h3>
+          <ul class="sevbars">
+            <li>
+              <span class="sevbars__lbl">No issue</span>
+              <span class="bar"><span class="bar__fill bar__fill--none" id="bar-none"></span></span>
+              <span class="sevbars__n" id="n-none">0</span>
+            </li>
+            <li>
+              <span class="sevbars__lbl">Mild</span>
+              <span class="bar"><span class="bar__fill bar__fill--mild" id="bar-mild"></span></span>
+              <span class="sevbars__n" id="n-mild">0</span>
+            </li>
+            <li>
+              <span class="sevbars__lbl">Moderate</span>
+              <span class="bar"><span class="bar__fill bar__fill--moderate" id="bar-moderate"></span></span>
+              <span class="sevbars__n" id="n-moderate">0</span>
+            </li>
+            <li>
+              <span class="sevbars__lbl">Severe</span>
+              <span class="bar"><span class="bar__fill bar__fill--severe" id="bar-severe"></span></span>
+              <span class="sevbars__n" id="n-severe">0</span>
+            </li>
+          </ul>
+        </section>
+
+        <section class="report__card">
+          <h3 class="report__cardtitle">Foods linked to reactions</h3>
+          <ul class="report__foods" id="report-foods"></ul>
+        </section>
+
+        <section class="report__card">
+          <h3 class="report__cardtitle">Medication adherence &middot; today</h3>
+          <p class="adherence" id="adherence-text">No doses scheduled today.</p>
+          <span class="bar bar--lg"><span class="bar__fill bar__fill--take" id="bar-adherence"></span></span>
+          <p class="adherence__sub" id="adherence-sub"></p>
+        </section>
+      </div>
     </section>
 
     <!-- ===================== COMPANION (CAT) ===================== -->
     <section class="companion" aria-label="Grandma's companion">
       <div class="companion__frame">
         <div class="companion__portrait">
-          <!-- Hand-drawn SVG cat: Whiskers -->
           <svg class="cat" id="cat" viewBox="0 0 240 240" role="img" aria-label="A drawing of Whiskers the cat">
             <defs>
               <radialGradient id="catFurGrad" cx="50%" cy="38%" r="70%">
@@ -87,30 +139,16 @@
                 <stop offset="100%" class="cat-fur-dark" />
               </radialGradient>
             </defs>
-
-            <!-- tail -->
             <path class="cat-fur cat-tail" d="M186 196 C 230 188 232 132 198 120 C 214 140 206 168 178 172 Z" />
-
-            <!-- body -->
             <path class="cat-fur" d="M70 232 C 48 200 52 150 78 132 L 162 132 C 188 150 192 200 170 232 Z" />
-            <!-- belly patch -->
             <path class="cat-belly" d="M104 232 C 96 206 98 168 120 156 C 142 168 144 206 136 232 Z" />
-
-            <!-- head -->
             <g class="cat-head">
-              <!-- ears -->
               <path class="cat-fur cat-ear cat-ear--l" d="M70 86 L 60 36 L 104 70 Z" />
               <path class="cat-ear-inner" d="M76 78 L 70 50 L 96 70 Z" />
               <path class="cat-fur cat-ear cat-ear--r" d="M170 86 L 180 36 L 136 70 Z" />
               <path class="cat-ear-inner" d="M164 78 L 170 50 L 144 70 Z" />
-
-              <!-- face -->
               <circle class="cat-face" cx="120" cy="106" r="58" fill="url(#catFurGrad)" />
-
-              <!-- stripes -->
               <path class="cat-stripe" d="M120 50 L 120 62 M104 52 L 108 64 M136 52 L 132 64" />
-
-              <!-- eyes -->
               <g class="cat-eyes">
                 <ellipse class="cat-eye" cx="100" cy="104" rx="13" ry="16" />
                 <ellipse class="cat-eye" cx="140" cy="104" rx="13" ry="16" />
@@ -119,12 +157,8 @@
                 <circle class="cat-glint" cx="103" cy="101" r="2.2" />
                 <circle class="cat-glint" cx="143" cy="101" r="2.2" />
               </g>
-
-              <!-- nose + mouth -->
               <path class="cat-nose" d="M114 124 L 126 124 L 120 132 Z" />
               <path class="cat-mouth" d="M120 132 C 120 142 112 144 106 140 M120 132 C 120 142 128 144 134 140" />
-
-              <!-- whiskers -->
               <g class="cat-whiskers">
                 <path d="M92 122 C 70 118 56 120 44 126" />
                 <path d="M92 130 C 70 130 56 134 46 142" />
@@ -133,47 +167,50 @@
               </g>
             </g>
           </svg>
-
-          <!-- speech bubble shown on meow -->
-          <div class="meow-bubble" id="meowBubble" aria-hidden="true">
-            <span class="vic-only">Meow!</span>
-            <span class="sum-only" title="meow">&#74086;&#74062;</span>
-          </div>
+          <div class="meow-bubble" id="meowBubble" aria-hidden="true"></div>
         </div>
 
         <div class="companion__body">
           <h2 class="companion__name">Whiskers</h2>
           <p class="companion__note">
-            Grandma&rsquo;s most devoted companion. Give him a little fuss &mdash; he does so love to be heard.
+            Grandma&rsquo;s most devoted companion. He has a great deal to say &mdash; give him a little fuss.
           </p>
-          <button class="meow-btn" id="meowBtn" type="button">
-            <span class="meow-btn__icon" aria-hidden="true">&#9834;</span>
-            Make Whiskers Meow
-          </button>
+          <div class="sound-btns" role="group" aria-label="Cat sounds">
+            <button class="sound-btn" data-sound="meow" type="button"><span aria-hidden="true">&#9834;</span> Meow</button>
+            <button class="sound-btn" data-sound="purr" type="button"><span aria-hidden="true">&#9835;</span> Purr</button>
+            <button class="sound-btn" data-sound="chirp" type="button"><span aria-hidden="true">&#9836;</span> Chirp</button>
+            <button class="sound-btn sound-btn--warn" data-sound="hiss" type="button"><span aria-hidden="true">&#9888;</span> Hiss</button>
+          </div>
         </div>
       </div>
     </section>
 
     <!-- ===================== TRACKERS ===================== -->
-    <div class="dashboard">
+    <div class="trackers">
 
-      <!-- ---------- FOOD ---------- -->
-      <section class="panel" data-log="food" aria-label="Food intake">
+      <!-- ---------- FOOD + LINKED REACTIONS ---------- -->
+      <section class="panel" data-log="food" aria-label="Food intake and reactions">
         <header class="panel__head">
           <span class="panel__icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M7 2v7a3 3 0 0 0 3 3v10M7 2v7M5 2v7M9 2v7M17 2c-2 0-3 3-3 7s1 5 3 5v9" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </span>
-          <h2 class="panel__title">Food Intake</h2>
+          <h2 class="panel__title">Food &amp; Reactions</h2>
         </header>
+
+        <div class="quick-picks" aria-label="Quick add Grandma's favourites">
+          <span class="quick-picks__label">Quick add</span>
+          <div class="chips" id="food-chips"></div>
+        </div>
 
         <form class="entry-form" data-form="food" autocomplete="off">
           <div class="field field--wide">
             <label for="food-item">Dish or food</label>
-            <input id="food-item" name="item" type="text" placeholder="Buttered toast &amp; tea" required />
+            <input id="food-item" name="item" type="text" list="food-suggestions" placeholder="Matzo ball soup&hellip;" required />
+            <datalist id="food-suggestions"></datalist>
           </div>
           <div class="field">
             <label for="food-portion">Portion</label>
-            <input id="food-portion" name="portion" type="text" placeholder="2 slices" />
+            <input id="food-portion" name="portion" type="text" placeholder="1 bowl" />
           </div>
           <div class="field">
             <label for="food-when">When</label>
@@ -186,43 +223,7 @@
           <button class="add-btn" type="submit">Record meal</button>
         </form>
 
-        <ul class="entries" data-list="food" aria-live="polite"></ul>
-      </section>
-
-      <!-- ---------- ALLERGIES ---------- -->
-      <section class="panel" data-log="allergy" aria-label="Allergic reactions">
-        <header class="panel__head">
-          <span class="panel__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 3l9 16H3z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9v5M12 16.5v.01" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-          </span>
-          <h2 class="panel__title">Allergic Reactions</h2>
-        </header>
-
-        <form class="entry-form" data-form="allergy" autocomplete="off">
-          <div class="field field--wide">
-            <label for="allergy-trigger">Suspected trigger</label>
-            <input id="allergy-trigger" name="trigger" type="text" placeholder="Shellfish, pollen, penicillin&hellip;" required />
-          </div>
-          <div class="field field--wide">
-            <label for="allergy-reaction">Reaction / symptoms</label>
-            <input id="allergy-reaction" name="reaction" type="text" placeholder="Itchy rash on arms" required />
-          </div>
-          <div class="field">
-            <label for="allergy-severity">Severity</label>
-            <select id="allergy-severity" name="severity">
-              <option value="mild">Mild</option>
-              <option value="moderate">Moderate</option>
-              <option value="severe">Severe</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="allergy-when">When</label>
-            <input id="allergy-when" name="when" type="datetime-local" required />
-          </div>
-          <button class="add-btn" type="submit">Record reaction</button>
-        </form>
-
-        <ul class="entries" data-list="allergy" aria-live="polite"></ul>
+        <ul class="entries meals" data-list="food" aria-live="polite"></ul>
       </section>
 
       <!-- ---------- MEDICATION ---------- -->
@@ -234,10 +235,16 @@
           <h2 class="panel__title">Medication</h2>
         </header>
 
+        <div class="quick-picks" aria-label="Quick add common medications">
+          <span class="quick-picks__label">Quick add</span>
+          <div class="chips" id="med-chips"></div>
+        </div>
+
         <form class="entry-form" data-form="medication" autocomplete="off">
           <div class="field field--wide">
             <label for="med-name">Medication</label>
-            <input id="med-name" name="name" type="text" placeholder="Lisinopril" required />
+            <input id="med-name" name="name" type="text" list="med-suggestions" placeholder="Lisinopril" required />
+            <datalist id="med-suggestions"></datalist>
           </div>
           <div class="field">
             <label for="med-dose">Dose</label>
@@ -266,7 +273,7 @@
     <div class="corner corner--bl" aria-hidden="true"></div>
     <div class="corner corner--br" aria-hidden="true"></div>
     <p class="footer__line">
-      <span class="vic-only">&#10086; Made with love, ivy &amp; roses &#10087;</span>
+      <span class="cyber-only">&#9671; Encrypted on this device &middot; no uplink to the net &#9671;</span>
       <span class="sum-only">&#74154; Inscribed in clay, that the days be remembered &#74154;</span>
     </p>
     <p class="footer__sub">Your records stay private on this device.</p>
